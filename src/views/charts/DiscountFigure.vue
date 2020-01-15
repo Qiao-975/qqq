@@ -4,6 +4,7 @@
       <a href="https://v-charts.js.org/#/" target="_blank">charts组件参考v-charts
       </a>
     </p>
+
     <ve-line :data="chartData"></ve-line>
   </div>
 </template>

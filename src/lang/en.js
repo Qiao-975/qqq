@@ -84,7 +84,7 @@ export default {
     fontawesome: 'fontawesome',
     pointMap: 'pointMap',
     roadBookMap: 'roadBookMap',
-    cityLlistMap: 'cityLlistMap',
+    cityLlistMap: 'userlist',
     baidumap: 'baidumap',
     gpsMap: 'gpsMap'
   },

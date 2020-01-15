@@ -55,7 +55,7 @@
     "showdown": "^1.8.6",
     "simplemde": "^1.11.2",
     "store": "^2.0.12",
-    "v-charts": "^1.17.6",
+    "v-charts": "^1.19.0",
     "v-contextmenu": "^2.7.0",
     "vue": "2.5.10",
     "vue-baidu-map": "^0.21.10",

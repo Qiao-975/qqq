@@ -1,4 +1,4 @@
-import { login, logout, getInfo, newlogin } from '@/api/login'
+import { login, logout, getInfo, newlogin, newgetInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import {
   setStore,
@@ -97,7 +97,25 @@ const user = {
         })
       })
     },
-
+    newGetInfo({ commit, state }) {
+      return new Promise((resolve, reject) => {
+        newgetInfo(state.token).then(response => {
+          const data = response
+          console.log(data.data, 'data')
+          let roles = ['admin']
+          if (roles && roles.length > 0) { // 验证返回的roles是否是一个非空数组
+            commit('SET_ROLES', roles)
+          } else {
+            reject('getInfo: roles must be a non-null array !')
+          }
+          commit('SET_NAME', data.name)
+          commit('SET_AVATAR', data.avatar)
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
     // 获取用户信息
     GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {

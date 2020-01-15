@@ -91,7 +91,7 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.$store.dispatch('newloginaction', { name : 'ruyi',password: 'ruyi'}).then(res => {
-            // this.$router.push({ path: '/dashboard/dashboard' })
+            this.$router.push({ path: '/dashboard/dashboard' })
           })
         }
       })

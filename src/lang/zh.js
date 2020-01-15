@@ -85,10 +85,10 @@ export default {
     Errorlog: '错误日志',
     svgicons: 'svg图标',
     fontawesome: 'fontawesome图标',
-    pointMap: '点聚合地图',
+    pointMap: '用户列表',
     roadBookMap: '路书地图',
-    cityLlistMap: '城市列表地图',
-    baidumap: '百度地图',
+    cityLlistMap: '分享类表',
+    baidumap: '用户中心',
     gpsMap: 'gps定位'
   },
   permission: {

@@ -12,7 +12,7 @@ export function login(username, password) {
 }
 export function newlogin(data) {
   return request({
-    url: '/web/Login/loginos',
+    url: '/web/api/Login/loginos',
     method: 'post',
     data: data
   })
@@ -20,6 +20,13 @@ export function newlogin(data) {
 export function getInfo(token) {
   return request({
     url: '/user/info',
+    method: 'get',
+    params: { token }
+  })
+}
+export function newgetInfo(token) {
+  return request({
+    url: '/web/api/User/getUserInfo',
     method: 'get',
     params: { token }
   })
