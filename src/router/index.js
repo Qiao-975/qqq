@@ -165,14 +165,14 @@ export const constantRouterMap = [
     },
     children: [
       {
-        path: 'pointMap',
-        name: 'pointMap',
+        path: 'userlist',
+        name: 'userlist',
         component: () => import('@/views/usercenter/userlist'),
         meta: { title: 'pointMap', icon: 'pointMap' }
       },
       {
-        path: 'cityLlistMap',
-        name: 'cityLlistMap',
+        path: 'sharelist',
+        name: 'sharelist',
         component: () => import('@/views/usercenter/sharelist'),
         meta: { title: 'cityLlistMap', icon: 'cityLlistMap' }
       },
