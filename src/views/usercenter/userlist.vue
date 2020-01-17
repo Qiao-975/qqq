@@ -20,6 +20,43 @@
           </el-select>
         </el-col>
         <el-col :span="23" class="boxd">
+          <div class="row1">
+            <!-- 时间日期选择器 -->
+            <div class="block datecheck">
+              <span class="demonstration">用户列表:</span>
+              <el-date-picker
+                v-model="value6"
+                type="datetimerange"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                value-format="timestamp"
+                @change="datepicker"
+              ></el-date-picker>
+            </div>
+            <!-- //类型选择框 -->
+            <div class="typebox">
+              <el-select v-model="pageList.type" placeholder="请选择" @change="gettype">
+                <el-option
+                  v-for="item in options1"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                ></el-option>
+              </el-select>
+            </div>
+            <!-- 搜索框 -->
+            <div class="searchbox">
+              <el-input
+                v-model="pageList.wx_nickname"
+                clearable
+                @change="search"
+                placeholder="请输入内容"
+              >
+                <el-button type="primary" plain slot="append" @click="search">搜索</el-button>
+              </el-input>
+            </div>
+          </div>
           <div class="box2">
             <el-table :data="tableData2" border class="table2">
               <el-table-column type="index" label="#" width></el-table-column>
@@ -42,7 +79,12 @@
             </el-table>
           </div>
           <div class="block">
-            <el-pagination layout="prev, pager, next" :total="50"></el-pagination>
+            <el-pagination
+              @current-change="skippage"
+              :page-size="10"
+              layout="total, prev, pager, next,  jumper "
+              :total="this.pageinfo.total"
+            ></el-pagination>
           </div>
         </el-col>
       </div>
@@ -89,12 +131,20 @@ export default {
   },
   data() {
     return {
+      value6: [],
       options: [{ key: 1, value: "洋洋餐厅" }],
+      options1: [
+        { value: "1", label: "自然" },
+        { value: "2", label: "复购" },
+        { value: "3", label: "裂变" },
+        { value: "4", label: "裂变+复购 " }
+      ],
       tableData2: [],
       titleObj: {
         create: "添加员工",
         updata: "编辑员工信息"
       },
+      pageinfo: {},
       titleStatus: "create",
       dialogVisible: false,
       value: "",
@@ -111,12 +161,9 @@ export default {
         UserSource: "微信"
       },
       pageList: {
-        // pagenum: 1,
-        // wx_nickname: '',
-        // type: null
         startTime: null,
-        seller_id: null,
         endTime: null,
+        seller_id: null,
         pagesize: 10,
         pagenum: 1,
         wx_nickname: "",
@@ -131,16 +178,24 @@ export default {
   methods: {
     getList() {
       newUserList(this.pageList).then(res => {
-        let data = res.data.data
+        let data = res.data.data;
+        let pageinfo = res.data.pageinfo;
         this.$message({
           message: "请求成功",
           type: "success"
         });
-        console.log(res.data, "data");
+        console.log(res, "data");
+        console.log(this.pageList, "加载中");
 
         this.tableData2 = [...data];
-        // this.tableData2 = data;
+        this.pageinfo = { ...pageinfo };
       });
+    },
+    gettype() {
+      this.getList();
+    },
+    search() {
+      this.getList();
     },
     chakan(index, row) {
       this.obj1 = {};
@@ -150,7 +205,26 @@ export default {
       this.dialogVisible = true;
       this.obj1 = { ...this.tableData2[index] };
       console.log(this.obj1);
-    }
+    },
+    skippage(val) {
+      this.pageList.pagenum = `${val}`;
+      this.getList();
+    },
+    datepicker() {
+      if(this.value6==[]){
+        this.pageList.startTime = this.pageList.endTime = null
+        this.getList();
+      }else {
+        let asd = this.value6[0].toString();
+        let asd1 = this.value6[1].toString();
+        let jkl = asd.slice(0, 10)-0;
+        let jkl1 = asd1.slice(0, 10)-0;
+  
+        this.pageList.startTime = jkl;
+        this.pageList.endTime = jkl1;
+        this.getList();
+      }
+    },
   }
 };
 </script>
@@ -182,5 +256,9 @@ export default {
       text-align: center;
     }
   }
+}
+.row1 > div {
+  display: inline-block;
+  margin-right: 30px;
 }
 </style>
