@@ -59,15 +59,15 @@
           </div>
           <div class="box2">
             <el-table :data="tableData2" border class="table2">
-              <el-table-column type="index" label="#" width></el-table-column>
-              <el-table-column prop="UserSource" label="用户来源" width></el-table-column>
-              <el-table-column prop="wx_nickname" label="用户名称" width></el-table-column>
-              <el-table-column prop="userType" label="用户类型" width="180px"></el-table-column>
-              <el-table-column prop="sex" label="性别" width></el-table-column>
-              <el-table-column prop="u_mobile" label="手机号" width></el-table-column>
-              <el-table-column prop="num" label="消费次数" width></el-table-column>
-              <el-table-column prop="add_time" label="上次消费时间" width="180px"></el-table-column>
-              <el-table-column label="操作" fixed="right" width>
+              <el-table-column type="index" label="#" width align="center" ></el-table-column>
+              <el-table-column prop="UserSource" label="用户来源" width align="center"></el-table-column>
+              <el-table-column prop="wx_nickname" label="用户名称" width align="center"></el-table-column>
+              <el-table-column prop="userType" label="用户类型" width="180px" align="center"></el-table-column>
+              <el-table-column prop="sex" label="性别" width align="center"></el-table-column>
+              <el-table-column prop="u_mobile" label="手机号" width align="center"></el-table-column>
+              <el-table-column prop="num" label="消费次数" width align="center"></el-table-column>
+              <el-table-column prop="add_time" label="上次消费时间" width="180px" align="center"></el-table-column>
+              <el-table-column label="操作" fixed="right" width align="center">
                 <template slot-scope="scope">
                   <el-button
                     size="mini"
@@ -184,8 +184,8 @@ export default {
           message: "请求成功",
           type: "success"
         });
-        console.log(res, "data");
-        console.log(this.pageList, "加载中");
+        // console.log(res, "data");
+        // console.log(this.pageList, "加载中");
 
         this.tableData2 = [...data];
         this.pageinfo = { ...pageinfo };
@@ -204,14 +204,15 @@ export default {
 
       this.dialogVisible = true;
       this.obj1 = { ...this.tableData2[index] };
-      console.log(this.obj1);
+      // console.log(this.obj1);
     },
     skippage(val) {
       this.pageList.pagenum = `${val}`;
       this.getList();
     },
     datepicker() {
-      if(this.value6==[]){
+      // console.log(this.value6,'asdfasdf')
+      if(!this.value6){
         this.pageList.startTime = this.pageList.endTime = null
         this.getList();
       }else {

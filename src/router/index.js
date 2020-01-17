@@ -217,17 +217,38 @@ export const constantRouterMap = [
   // },
   // 第三方官网
   {
-    path: '/myiframe',
+    path: '/storemanagement',
     component: Layout,
-    redirect: '/myiframe',
+    redirect: '/storemanagement/yggl',
+    name: 'storemanagement',
+    meta: { title: 'storemanagement', icon: 'people' },
     children: [{
-      path: ':routerPath',
-      name: 'myiframe',
-      component: () => import('@/components/nx-iframe'),
-      meta: { title: 'thirdPartyWebsite', icon: 'people' }
-    }]
+      path: 'yggl',
+      name: 'yggl',
+      component: () => import('@/views/StoreManagement/yggl'),
+      meta: { title: 'StaffMangament', icon: 'people' },
+    },
+    {
+      path: 'mdxxsz',
+      name: 'mdxxsz',
+      component: () => import('@/views/StoreManagement/mdxxsz'),
+      meta: { title: 'StoreInfo', icon: 'people' },
+    }
+  ]
 
   },
+  // {
+  //   path: '/myiframe',
+  //   component: Layout,
+  //   redirect: '/myiframe',
+  //   children: [{
+  //     path: ':routerPath',
+  //     name: 'myiframe',
+  //     component: () => import('@/components/nx-iframe'),
+  //     meta: { title: 'thirdPartyWebsite', icon: 'people' }
+  //   }]
+
+  // },
   // pdf说明
   {
     path: '/pdfTest',
