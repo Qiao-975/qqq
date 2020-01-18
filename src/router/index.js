@@ -178,6 +178,7 @@ export const constantRouterMap = [
       },
     ]
   },
+
   // 地图
   // {
   //   path: '/map',
@@ -234,8 +235,32 @@ export const constantRouterMap = [
       component: () => import('@/views/StoreManagement/mdxxsz'),
       meta: { title: 'StoreInfo', icon: 'people' },
     }
-  ]
-
+    ]
+  },
+  // 对账收款
+  {
+    path: '/gathering',
+    component: Layout,
+    redirect: '/gathering/gatheringImfor',
+    name: 'gathering',
+    meta: {
+      title: 'gathering',
+      icon: 'baidumap'
+    },
+    children: [
+      {
+        path: 'gatheringImfor',
+        name: 'gatheringImfor',
+        component: () => import('@/views/gathering/gatheringImfor'),
+        meta: { title: 'gatheringImfor', icon: 'pointMap' }
+      },
+      {
+        path: 'amendGathering',
+        name: 'amendGathering',
+        component: () => import('@/views/gathering/amendGathering'),
+        meta: { title: 'amendGathering', icon: 'cityLlistMap' }
+      },
+    ]
   },
   // {
   //   path: '/myiframe',
@@ -657,8 +682,8 @@ export const asyncRouterMap = [
       icon: '404'
     },
     children: [
-      { path: '401', component: () => import('@/views/errorPage/401'), name: 'page401', meta: { title: 'page401', noCache: true }},
-      { path: '404', component: () => import('@/views/errorPage/404'), name: 'page404', meta: { title: 'page404', noCache: true }}
+      { path: '401', component: () => import('@/views/errorPage/401'), name: 'page401', meta: { title: 'page401', noCache: true } },
+      { path: '404', component: () => import('@/views/errorPage/404'), name: 'page404', meta: { title: 'page404', noCache: true } }
     ]
   },
   // 错误日志
