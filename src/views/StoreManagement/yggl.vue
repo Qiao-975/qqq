@@ -24,16 +24,16 @@
                   size="mini"
                   type="danger"
                   plain
-                  @click="dialogVisible2=true;shanchu(scope.$index, scope.row,id)"
+                  @click="dialogVisible2=true;shanchu(scope.$index, scope.row)"
                 >删除</el-button>
               </template>
             </el-table-column>
           </el-table>
           <el-pagination
             @current-change="handleCurrentChange"
-            :page-size="10"
+            :page-size="5"
             layout="total, prev, pager, next"
-            :total="pageList.total"
+            :total="pageinfo.total"
           ></el-pagination>
         </div>
       </el-col>
@@ -145,7 +145,7 @@ export default {
         // 要执行的函数
         let data = res.data.data;
         let pageinfo = res.data.pageinfo;
-        console.log(data, pageinfo, "getList返回的数据");
+        // console.log(data, pageinfo, "请求员工列表返回的数据");
         this.tableData3 = [...data];
         this.pageinfo = { ...pageinfo };
         // 最后
@@ -157,6 +157,8 @@ export default {
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
+      this.pageList.pagenum = `${val}`;
+      this.getList();
     },
     getTime() {
       let date = new Date();
@@ -175,6 +177,7 @@ export default {
     },
     // 编辑按钮
     chakan(index, row) {
+      // console.log(index, row, "编辑的按钮");
       this.id = this.tableData3[index].id;
       this.staff_name = this.tableData3[index].staff_name;
       this.mobile = this.tableData3[index].mobile;
@@ -183,17 +186,15 @@ export default {
       this.create_time = this.tableData3[index].create_time;
       this.update_time = this.tableData3[index].update_time;
       this.index = index;
-      // console.log('点击编辑');
     },
     // 删除按钮
-    shanchu(index, row,id) {
-      this.shanchuindex = index;
-      console.log(id,'要删除的数据的id');
+    shanchu(index, row) {
+      console.log(row, "要删除的数据的row");
+      this.row = row
     },
     // 确认保存按钮
     seave() {
-      console.log(this.id, '点击"编辑员工信息"的确定');
-
+      // console.log(this.id, '点击"编辑员工信息"的确定');
       var obje = {
         id: this.id,
         staff_name: this.staff_name,
@@ -202,7 +203,6 @@ export default {
         create_time: this.create_time,
         update_time: this.getTime()
       };
-      this.tableData3.splice(this.index, 1, obje);
       saveStaffList(obje).then(res => {
         this.getList();
       });
@@ -242,9 +242,10 @@ export default {
     },
     // 确认删除按钮
     del() {
-      this.dialogVisible2 = false;
-      console.log("关闭删除提示");
-      this.tableData3.splice(this.shanchuindex, 1);
+      let row = this.row
+      deleteStaff(row).then(res => {
+        this.getList();
+      });
       this.$message({
         message: "删除成功",
         type: "success"

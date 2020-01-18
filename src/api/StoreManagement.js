@@ -1,31 +1,7 @@
 import request from '@/utils/request'
 
-
-// export function newlogin(data) {
-//   return request({
-//     url: '/web/Login/loginos',
-//     method: 'post',
-//     data: data
-//   })
-// }
-
-// export function newgetInfo(token) {
-//   return request({
-//     url: '/web/User/getUserInfo',
-//     method: 'get',
-//     params: { "token": token }
-//   })
-// }
-// export function newUserList(data) {
-//   console.log(data,'请求usercenter所需数据')
-//   return request({
-//     url: '/web/home/Store/newUserList',
-//     method: 'post',
-//     data: data
-//   })
-// }
 export function newStaffList(data) {
-  console.log(data,'请求店铺管理所需数据')
+  // console.log(data,'请求员工列表所需数据')
   return request({
     url: '/web/home/Staff/getStaffList',
     method: 'post',
@@ -33,7 +9,7 @@ export function newStaffList(data) {
   })
 }
 export function addStaffList(data) {
-  console.log(data,'请求店铺管理所需数据')
+  // console.log(data,'请求保存添加员工所需数据')
   return request({
     url: '/web/home/Staff/addStaff',
     method: 'post',
@@ -41,7 +17,7 @@ export function addStaffList(data) {
   })
 }
 export function saveStaffList(data) {
-  console.log(data,'请求店铺管理所需数据')
+  // console.log(data,'请求保存员工管理所需数据')
   return request({
     url: '/web/home/Staff/saveStaff',
     method: 'post',
@@ -49,7 +25,7 @@ export function saveStaffList(data) {
   })
 }
 export function deleteStaff(data) {
-  console.log(data,'请求店铺管理所需数据')
+  // console.log(data,'请求传入删除所需数据')
   return request({
     url: '/web/home/Staff/deleteStaff',
     method: 'post',
